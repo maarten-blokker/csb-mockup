@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Register</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js" integrity="sha256-UOSXsAgYN43P/oVrmU+JlHtiDGYWN2iHnJuKY9WD+Jg=" crossorigin="anonymous"></script>
+        <script src="/js/register.js"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+        <![endif]-->
+
+        <link rel="shortcut icon" href="https://d17xidaa5chwhl.cloudfront.net/INTERSHOP/static/WFS/dbk-shop-Site/-/-/nl_NL/images/favicon.ico"/>
+
+        <style>
+            body {
+              padding-top: 50px;
+            }
+            
+            .error {
+              color: red;
+            }
+            
+            .form-control.error  {
+                border-color: red;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px rgba(255, 0, 0, 0.4);
+                outline: 0 none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            {{#if messages.alert}}
+            <div class="alert alert-success" role="alert">{{messages.alert}}</div>
+            {{/if}}
+
+            <div class="row span12">
+                <img src="/images/logo.svg" alt=""/>
+            </div>
+            <form class="form-horizontal" id="registerForm" method="POST" novalidate>
+                <fieldset>
+                    <legend>Registreer</legend>
+
+                    <!-- Multiple Radios -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="radioCreditcard">Heeft u een Bijenkorf creditcard?</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label for="radioCreditcard-0">
+                                    <input type="radio" name="radioCreditcard" id="radioCreditcard-0" value="1" >
+                                    Ja
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="radioCreditcard-1">
+                                    <input type="radio" name="radioCreditcard" id="radioCreditcard-1" value="0" checked="checked">
+                                    Nee
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="email">E-mailadres*</label>  
+                        <div class="col-md-4">
+                            <input id="email" name="email" type="text" placeholder="" class="form-control input-md">
+                            <span class="help-block">(Maximimaal 50 tekens)</span>  
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="password">Wachtwoord*</label>
+                        <div class="col-md-4">
+                            <input id="password" name="password" type="password" placeholder="" class="form-control input-md">
+                            <span class="help-block">(Minimaal 6 tekens, met in ieder geval: 1 cijfer, 1 hoofdletter en 1 kleine letter)</span>
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="password2">Wachtwoord*</label>
+                        <div class="col-md-4">
+                            <input id="password2" name="password2" type="password" placeholder="" class="form-control input-md">
+                            <span class="help-block">(Ter bevestiging)</span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="companyName">Bedrijfsnaam</label>  
+                        <div class="col-md-4">
+                            <input id="companyName" name="companyName" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Multiple Radios -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="title">Aanhef</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label for="title-0">
+                                    <input type="radio" name="title" id="title-0" value="1" checked="checked">
+                                    Dhr
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="title-1">
+                                    <input type="radio" name="title" id="title-1" value="2">
+                                    Mevr
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="card">
+                        <label class="col-md-4 control-label" for="cardNumber">Kaart nummer*</label>  
+                        <div class="col-md-4">
+                            <input id="cardNumber" name="cardNumber" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="card">
+                        <label class="col-md-4 control-label" for="cardHolderName">Naam kaarthouder*</label>  
+                        <div class="col-md-4">
+                            <input id="cardHolderName" name="cardHolderName" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Multiple inputs -->
+                    <div class="form-group" data-formPart="card">
+                        <label class="col-md-4 control-label" for="expiryMonth">Vervaldatum*</label>  
+                        <div class="row">
+                            <div class="col-md-2">
+                                <select id="expiryMonth" name="expiryMonth" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <input id="expiryYear" name="expiryYear" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="card">
+                        <label class="col-md-4 control-label" for="cvc">CVC*</label>  
+                        <div class="col-md-2">
+                            <input id="cvc" name="cvc" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="firstName">Voornaam*</label>  
+                        <div class="col-md-4">
+                            <input id="firstName" name="firstName" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="secondName">Tussenvoegsel</label>  
+                        <div class="col-md-2">
+                            <input id="secondName" name="secondName" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="lastName">Achternaam*</label>  
+                        <div class="col-md-4">
+                            <input id="lastName" name="lastName" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Select -->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="country">Land</label>
+                        <div class="col-md-4">
+                            <select id="country" name="country" class="form-control">
+                                <option value="nl">Nederland</option>
+                                <option value="be">Belgie</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="postalCode">Postcode*</label>  
+                        <div class="col-md-4">
+                            <input id="postalCode" name="postalCode" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="houseNumber">Huis nummer*</label>  
+                        <div class="col-md-4">
+                            <input id="houseNumber" name="houseNumber" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="houseNumberSuffix">Toevoeging</label>  
+                        <div class="col-md-2">
+                            <input id="houseNumberSuffix" name="houseNumberSuffix" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="street">Straat*</label>  
+                        <div class="col-md-4">
+                            <input id="street" name="street" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="city">Plaats*</label>  
+                        <div class="col-md-4">
+                            <input id="city" name="city" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" data-formPart="normal">
+                        <label class="col-md-4 control-label" for="phoneNumber">Telefoonnummer</label>  
+                        <div class="col-md-4">
+                            <input id="phoneNumber" name="phoneNumber" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Form actions -->
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-10">
+                            <button type="submit" class="btn btn-default">Sign in</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div> <!-- /container -->
+    </body>
+</html>
