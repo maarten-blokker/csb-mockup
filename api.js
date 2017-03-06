@@ -2,11 +2,11 @@ var request = require('request');
 
 const api_host = 'ceres-all.sit.debijenkorf.nl';
 const api_port = '80';
-const path_register = 'http://ceres-all.sit.debijenkorf.nl:80/customer/user/register';
+const path_register = 'http://local.sit.debijenkorf.nl:8090/customer/user/register';
 
 const headers = {
     'User-Agent': 'Mock Agent/0.0.1',
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/json'
 };
 
 module.exports = {
@@ -21,8 +21,8 @@ module.exports = {
             url: path_register,
             method: 'POST',
             headers: headers,
-            form: data
-        };
+            json: data
+        };    
 
         // Start the request
         request(options, function (error, response, body) {
